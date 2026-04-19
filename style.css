@@ -67,7 +67,7 @@ body {
     margin-bottom: 18px;
     /* центруємо: зліва і справа однаковий відступ, але правий менший щоб peek був видний */
     padding-left: 5vw;
-    padding-right: 0;
+    padding-right: 5vw;
 }
 
 .cards-track {
@@ -77,11 +77,12 @@ body {
     will-change: transform;
     /* треба щоб трек був ширший за viewport */
     width: fit-content;
+    padding-right: 10vw;
 }
 
 .scene {
-    width: 85vw;
-    max-width: 380px;
+        width: 88vw;
+        max-width: 360px;
     flex-shrink: 0;
     perspective: 1000px;
     margin-top: 4vh;
