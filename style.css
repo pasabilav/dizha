@@ -80,11 +80,11 @@ body {
 }
 
 .scene {
-    /* 85vw + 5vw зліва = 90vw, залишається 10vw для peek */
     width: 85vw;
     max-width: 380px;
     flex-shrink: 0;
     perspective: 1000px;
+    margin-top: 4vh;
 }
 
 /* Сусідня картка справа — зменшена і затемнена */
@@ -93,10 +93,28 @@ body {
     max-width: 380px;
     flex-shrink: 0;
     perspective: 1000px;
-    transform: scale(0.95);
+    transform: scale(0.92);
     transform-origin: left center;
-    opacity: 0.45;
+    opacity: 0.35;
     pointer-events: none;
+    /* ховаємо весь контент всередині */
+    filter: blur(2px);
+    overflow: hidden;
+}
+
+.scene-next .card__face--front {
+    /* перекриваємо контент напівпрозорим шаром */
+    position: relative;
+}
+
+.scene-next .card__face--front::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 26px;
 }
 
 .card {
@@ -130,7 +148,9 @@ body {
 }
 
 .card__face--front {
-    padding: 22px 20px 20px 20px;
+    padding: 22px 20px 24px 20px;
+    min-height: 63vh;
+    max-height: 70vh;
 }
 
 .card__face--back {
@@ -161,8 +181,8 @@ body {
 }
 
 .photo {
-    width: 138px;
-    height: 178px;
+    width: 148px;
+    height: 195px;
     border-radius: 10px;
     object-fit: cover;
     flex-shrink: 0;
@@ -211,7 +231,7 @@ body {
     );
     background-size: 300% 100%;
     animation: marqueeGradient 5s linear infinite;
-    margin: 16px -20px 0 -20px;
+    margin: auto -20px 0 -20px;
     padding: 8px 0;
     overflow: hidden;
     white-space: nowrap;
