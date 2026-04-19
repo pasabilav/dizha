@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#a8c8e8">
+    <meta name="theme-color" content="#b0c8e0">
 
     <meta name="apple-mobile-web-app-title" content="Дія">
 
@@ -21,6 +21,8 @@
 
 <div class="bg-blur"></div>
 
+<div class="cards-viewport">
+    <div class="cards-track" id="cardsTrack">
 <div class="scene">
     <div class="card" id="mainCard">
         <div class="card__face card__face--front">
@@ -58,6 +60,47 @@
         </div>
     </div>
 </div>
+        <div class="scene">
+            <div class="card">
+                <div class="card__face card__face--front card__face--tax">
+
+                    <div class="header">Картка платника<br>податків</div>
+                    <div class="tax-label">РНОКПП</div>
+
+                    <div class="tax-name">
+                        Толчинський<br>Владислав<br>Валерійович
+                    </div>
+
+                    <div class="tax-dob-label">Дата народження:</div>
+                    <div class="tax-dob">29.03.1995</div>
+
+                    <div class="marquee-container">
+                        <div class="marquee-text">
+                            Документ оновлено о 15:21 | 11.04.2026 • Перевірено • Документ діє під час воєнного стану.
+                        </div>
+                    </div>
+
+                    <div class="footer-info">
+                        <div class="tax-number">
+                            3478608192
+                            <span class="copy-icon">⧉</span>
+                        </div>
+                        <div class="menu-dots">···</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
 
 <nav class="tab-bar">
     <a href="#" class="tab-item active"><div class="tab-icon"></div>Документи</a>
@@ -67,5 +110,6 @@
 </nav>
 
 <script src="code.js"></script>
+<script src="swipe.js"></script>
 </body>
 </html>
