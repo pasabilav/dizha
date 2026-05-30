@@ -1,115 +1,537 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#b0c8e0">
-
-    <meta name="apple-mobile-web-app-title" content="Дія">
-
-    <link rel="apple-touch-icon" href="img/logo_180.png">
-
-    <link rel="manifest" href="/manifest.json">
-
-    <title>єДокумент</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Дія">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<title>Дія</title>
 </head>
 <body>
 
-<div class="bg-blur"></div>
+<canvas id="bg-canvas"></canvas>
 
-<div class="cards-viewport">
-    <div class="cards-track" id="cardsTrack">
-<div class="scene">
-    <div class="card" id="mainCard">
-        <div class="card__face card__face--front">
-            <div class="header">єДокумент</div>
-            
-            <div class="profile-section">
-                <img src="img/photo.png" alt="Фото" class="photo" id="userPhoto">
-                <div class="info-labels">
-                    <p>Дата народження:</p>
-                    <span>29.03.1995</span>
-                    <p>РНОКПП:</p>
-                    <span>3478608192</span>
-                </div>
-            </div>
+<div id="app">
+  <div class="status-bar"></div>
 
-            <div class="marquee-container">
-                <div class="marquee-text">
-                    Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася. А ми тую червону калину, підіймемо, а ми нашу славну Україну, гей, гей, розвеселимо! Документ діє під час воєнного стану.
-                </div>
-            </div>
-
-            <div class="footer-info">
-                <div class="user-name">
-                    Толчинський<br>Владислав<br>Валерійович
-                </div>
-                <div class="menu-dots" id="menuBtn">...</div>
-            </div>
-        </div>
-
-        <div class="card__face card__face--back">
-            <div class="qr-placeholder">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=BogdanPosobilov" alt="QR Code">
-            </div>
-            <p style="margin-top: 20px; font-weight: 600;">QR-код для перевірки</p>
-        </div>
+  <!-- ===== СТРІЧКА ===== -->
+  <div id="page-home" class="page active">
+    <div class="home-header">
+      <h1>Привіт, Богдан 👋</h1>
     </div>
-</div>
-        <div class="scene">
-            <div class="card">
-                <div class="card__face card__face--front card__face--tax">
 
-                    <div class="header">Картка платника<br>податків</div>
-                    <div class="tax-label">РНОКПП</div>
-
-                    <div class="tax-name">
-                        Толчинський<br>Владислав<br>Валерійович
-                    </div>
-
-                    <div class="tax-dob-label">Дата народження:</div>
-                    <div class="tax-dob">29.03.1995</div>
-
-                    <div class="marquee-container">
-                        <div class="marquee-text">
-                            Документ оновлено о 15:21 | 11.04.2026 • Перевірено • Документ діє під час воєнного стану.
-                        </div>
-                    </div>
-
-                    <div class="footer-info">
-                        <div class="tax-number">
-                            3478608192
-                            <span class="copy-icon">⧉</span>
-                        </div>
-                        <div class="menu-dots">···</div>
-                    </div>
-
-                </div>
-            </div>
+    <div class="nezlamnist-card" onclick="openModal('nezlamnist')">
+      <h2>Незламність</h2>
+      <p>Мапа укриттів, Пунктів незламності та відділень Power Banking.<br>Заява про відсутній зв'язок.</p>
+      <div class="nezlamnist-footer">
+        <div class="nez-icons">
+          <div class="nez-icon yellow">⚡</div>
+          <div class="nez-icon blue">🔵</div>
+          <div class="nez-icon green">🏛</div>
         </div>
-
+        <div class="arrow-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
     </div>
-</div>
-<div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+
+    <div class="quick-actions">
+      <div class="quick-btn" onclick="openModal('scanner')">
+        <div class="quick-btn-icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <rect x="3" y="3" width="10" height="10" rx="2" stroke="white" stroke-width="2.2"/>
+            <rect x="21" y="3" width="10" height="10" rx="2" stroke="white" stroke-width="2.2"/>
+            <rect x="3" y="21" width="10" height="10" rx="2" stroke="white" stroke-width="2.2"/>
+            <path d="M21 21h3v3h-3zM27 21h3v3h-3zM24 24h3v3h-3zM21 27h3v3h-3zM27 27h3v3h-3z" fill="white"/>
+          </svg>
+        </div>
+        <span>Дія Сканер</span>
+      </div>
+      <div class="quick-btn" onclick="openModal('military')">
+        <div class="quick-btn-icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <path d="M17 4L6 9v9c0 6 5 10 11 12 6-2 11-6 11-12V9L17 4z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M17 12v8M13 16h8" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span>Військові облігації</span>
+      </div>
+      <div class="quick-btn" onclick="openModal('signal')">
+        <div class="quick-btn-icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <path d="M17 28V18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M10 22a9 9 0 0014 0" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M6 16a15 15 0 0022 0" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="5" y1="5" x2="29" y2="29" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span>Відсутній зв'язок</span>
+      </div>
+    </div>
+
+    <div class="drones-banner" onclick="openModal('drones')">
+      <div class="drones-bg-emblems">
+        <span>🛡️</span><span>🛡️</span><span>🛡️</span><span>🛡️</span><span>🛡️</span>
+        <span>🛡️</span><span>🛡️</span><span>🛡️</span><span>🛡️</span><span>🛡️</span>
+        <span>🛡️</span><span>🛡️</span><span>🛡️</span><span>🛡️</span><span>🛡️</span>
+      </div>
+      <div class="drones-content">
+        <div class="drones-title">
+          <div class="drones-logo">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <path d="M15 4L4 10v10c0 5 5 8 11 10 6-2 11-5 11-10V10L15 4z" stroke="white" stroke-width="2" fill="none"/>
+              <path d="M15 10v8M11 14h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="drones-name">ЛІНІЯ<br>ДРОНІВ</div>
+        </div>
+        <div class="drones-footer">
+          <span>Змінити хід подій</span>
+          <div class="arrow-btn-white">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cashback-card" onclick="openModal('cashback')">
+      <div class="cashback-amount">0.00 грн</div>
+      <div class="cashback-label">Накопичено кешбеку за травень</div>
+      <div class="cashback-footer">
+        <div class="flag-bars">
+          <div class="flag-bar blue"></div>
+          <div class="flag-bar blue"></div>
+          <div class="flag-bar blue"></div>
+          <div class="flag-bar yellow"></div>
+          <div class="flag-bar yellow"></div>
+          <div class="flag-bar yellow"></div>
+        </div>
+        <div class="arrow-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ДОКУМЕНТИ ===== -->
+  <div id="page-docs" class="page">
+    <div class="docs-area">
+      <div class="cards-viewport" id="cardsViewport">
+        <div class="cards-track" id="cardsTrack">
+
+          <!-- Card 0: єДокумент -->
+          <div class="doc-card-wrap is-active" id="card-0" onclick="flipCard(0)">
+            <div class="doc-card-inner">
+              <div class="doc-card-front">
+                <div class="card-body">
+                  <div class="card-title">єДокумент</div>
+                  <div class="card-photo-row">
+                    <div class="card-photo">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="8" r="4" fill="#7c6fcd"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="#7c6fcd"/>
+                      </svg>
+                    </div>
+                    <div class="card-info">
+                      <div class="card-info-label">Дата народження:</div>
+                      <div class="card-info-value">13.02.2002</div>
+                      <div class="card-info-label">РНОКПП:</div>
+                      <div class="card-info-value">3474211794</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-ticker-wrap">
+                  <div class="card-ticker">
+                    <span>єДокумент діє під час воєнного стану. Ой у лузі червона калина похилилася, чогось наша славна Україна засмутилася. А ми тую червону калину піднімемо. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; єДокумент діє під час воєнного стану. Ой у лузі червона калина похилилася, чогось наша славна Україна засмутилася. А ми тую червону калину піднімемо. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="card-name">Пособілов<br>Богдан<br>Романович</div>
+                  <div class="more-btn" onclick="event.stopPropagation(); openModal('docMore')">
+                    <span class="dot-mid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-card-back">
+                <div class="qr-wrap"><canvas id="qr-0"></canvas></div>
+                <p style="margin-top:14px;font-size:13px;color:#666;font-weight:600">Натисніть щоб повернутись</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 1: Картка платника податків -->
+          <div class="doc-card-wrap" id="card-1" onclick="flipCard(1)">
+            <div class="doc-card-inner">
+              <div class="doc-card-front">
+                <div class="card-tax-body">
+                  <div class="card-title" style="font-size:22px">Картка платника<br>податків</div>
+                  <div class="card-subtitle">РНОКПП</div>
+                  <div class="card-tax-name">Пособілов<br>Богдан<br>Романович</div>
+                  <div class="card-tax-dob-label">Дата народження:</div>
+                  <div class="card-tax-dob">13.02.1995</div>
+                </div>
+                <div class="card-ticker-wrap teal">
+                  <div class="card-ticker">
+                    <span>Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • </span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div>
+                    <div class="tax-number-row">
+                      <span class="card-number">3474211794</span>
+                      <button class="copy-btn" onclick="event.stopPropagation(); copyText('3474211794')">
+                        <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#000" stroke-width="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#000" stroke-width="2"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="more-btn" onclick="event.stopPropagation(); openModal('docMore')">
+                    <span class="dot-mid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-card-back">
+                <div class="qr-wrap"><canvas id="qr-1"></canvas></div>
+                <p style="margin-top:14px;font-size:13px;color:#666;font-weight:600">Натисніть щоб повернутись</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Водійське посвідчення -->
+          <div class="doc-card-wrap" id="card-2" onclick="flipCard(2)">
+            <div class="doc-card-inner">
+              <div class="doc-card-front">
+                <div class="card-tax-body">
+                  <div class="card-title" style="font-size:22px">Водійське<br>посвідчення</div>
+                  <div class="card-subtitle">Категорія B</div>
+                  <div class="card-tax-name">Пособілов<br>Богдан<br>Романович</div>
+                  <div class="card-tax-dob-label">Дата видачі:</div>
+                  <div class="card-tax-dob">15.06.2018</div>
+                  <div style="margin-top:8px">
+                    <div class="card-tax-dob-label">Дійсне до:</div>
+                    <div class="card-tax-dob">15.06.2028</div>
+                  </div>
+                </div>
+                <div class="card-ticker-wrap" style="background:linear-gradient(90deg,#93c5fd,#bfdbfe)">
+                  <div class="card-ticker">
+                    <span>Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • </span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="card-name" style="font-size:16px">УКР &nbsp;•&nbsp; B</div>
+                  <div class="more-btn" onclick="event.stopPropagation(); openModal('docMore')">
+                    <span class="dot-mid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-card-back">
+                <div class="qr-wrap"><canvas id="qr-2"></canvas></div>
+                <p style="margin-top:14px;font-size:13px;color:#666;font-weight:600">Натисніть щоб повернутись</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Студентський квиток -->
+          <div class="doc-card-wrap" id="card-3" onclick="flipCard(3)">
+            <div class="doc-card-inner">
+              <div class="doc-card-front">
+                <div class="card-tax-body">
+                  <div class="card-title" style="font-size:22px">Студентський<br>квиток</div>
+                  <div class="card-subtitle">Університет</div>
+                  <div class="card-tax-name">Пособілов<br>Богдан<br>Романович</div>
+                  <div class="card-tax-dob-label">ID студента:</div>
+                  <div class="card-tax-dob">UA-2018-4421</div>
+                </div>
+                <div class="card-ticker-wrap" style="background:linear-gradient(90deg,#c4b5fd,#ddd6fe)">
+                  <div class="card-ticker">
+                    <span>Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • </span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="card-name" style="font-size:15px">Денна форма</div>
+                  <div class="more-btn" onclick="event.stopPropagation(); openModal('docMore')">
+                    <span class="dot-mid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-card-back">
+                <div class="qr-wrap"><canvas id="qr-3"></canvas></div>
+                <p style="margin-top:14px;font-size:13px;color:#666;font-weight:600">Натисніть щоб повернутись</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Закордонний паспорт -->
+          <div class="doc-card-wrap" id="card-4" onclick="flipCard(4)">
+            <div class="doc-card-inner">
+              <div class="doc-card-front">
+                <div class="card-tax-body">
+                  <div class="card-title" style="font-size:22px">Закордонний<br>паспорт</div>
+                  <div class="card-subtitle">UKRAINE / УКРАЇНА</div>
+                  <div class="card-tax-name">Pobilov<br>Bohdan<br>Romanovych</div>
+                  <div class="card-tax-dob-label">Дійсний до:</div>
+                  <div class="card-tax-dob">10.03.2030</div>
+                </div>
+                <div class="card-ticker-wrap" style="background:linear-gradient(90deg,#fde68a,#fef3c7)">
+                  <div class="card-ticker">
+                    <span>Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • Документ оновлено о 22:17 | 29.05.2026 • Перевірено державою • </span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="card-name" style="font-size:15px">🇺🇦 Паспорт</div>
+                  <div class="more-btn" onclick="event.stopPropagation(); openModal('docMore')">
+                    <span class="dot-mid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-card-back">
+                <div class="qr-wrap"><canvas id="qr-4"></canvas></div>
+                <p style="margin-top:14px;font-size:13px;color:#666;font-weight:600">Натисніть щоб повернутись</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /cards-track -->
+      </div><!-- /cards-viewport -->
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+
+  <!-- ===== СЕРВІСИ ===== -->
+  <div id="page-services" class="page">
+    <div class="services-header"><h1>Сервіси</h1></div>
+    <div class="services-search" onclick="showToast('Пошук сервісів...')">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#000" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Пошук сервісів</span>
+    </div>
+    <div class="services-section">
+      <div class="services-section-title">Популярні</div>
+      <div class="services-grid">
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">🆔</div><div class="service-card-name">Витяг про реєстрацію</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">🏠</div><div class="service-card-name">Реєстрація місця проживання</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">🚗</div><div class="service-card-name">Реєстрація авто</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">💊</div><div class="service-card-name">еРецепт</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">👶</div><div class="service-card-name">Допомога при народженні дитини</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">📋</div><div class="service-card-name">Довідка про несудимість</div></div>
+      </div>
+      <div class="services-section-title">Бізнес</div>
+      <div class="services-grid">
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">🏢</div><div class="service-card-name">Реєстрація ФОП</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">📊</div><div class="service-card-name">Звітність ФОП</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">🔑</div><div class="service-card-name">КЕП підпис</div></div>
+        <div class="service-card" onclick="openModal('service')"><div class="service-card-icon">📜</div><div class="service-card-name">Ліцензії та дозволи</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== МЕНЮ ===== -->
+  <div id="page-menu" class="page">
+    <div class="menu-header"><h1>Меню</h1><p>Налаштування та профіль</p></div>
+    <div class="menu-profile-card" onclick="openModal('profile')">
+      <div class="menu-avatar">👤</div>
+      <div class="menu-profile-info"><h3>Пособілов Богдан</h3><p>Профіль користувача</p></div>
+      <div style="font-size:20px;opacity:0.3">›</div>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item" onclick="openModal('notify')"><div class="menu-item-icon">🔔</div><div class="menu-item-text">Сповіщення</div><div class="menu-item-arrow">›</div></div>
+      <div class="menu-item" onclick="openModal('security')"><div class="menu-item-icon">🔐</div><div class="menu-item-text">Безпека</div><div class="menu-item-arrow">›</div></div>
+      <div class="menu-item" onclick="openModal('lang')"><div class="menu-item-icon">🌐</div><div class="menu-item-text">Мова</div><div class="menu-item-arrow">›</div></div>
+      <div class="menu-item" onclick="openModal('support')"><div class="menu-item-icon">💬</div><div class="menu-item-text">Підтримка</div><div class="menu-item-arrow">›</div></div>
+      <div class="menu-item" onclick="openModal('about')"><div class="menu-item-icon">ℹ️</div><div class="menu-item-text">Про додаток</div><div class="menu-item-arrow">›</div></div>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item" onclick="openModal('logout')"><div class="menu-item-icon">🚪</div><div class="menu-item-text" style="color:#e53e3e">Вийти</div><div class="menu-item-arrow">›</div></div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <button class="nav-btn active" id="nav-home" onclick="switchTab('home')">
+      <svg viewBox="0 0 26 26" fill="none"><rect x="3" y="10" width="20" height="14" rx="3" stroke="#888" stroke-width="2"/><path d="M1 11L13 2l12 9" stroke="#888" stroke-width="2" stroke-linecap="round"/><rect x="10" y="17" width="6" height="7" rx="1.5" stroke="#888" stroke-width="2"/></svg>
+      <span>Стрічка</span>
+    </button>
+    <button class="nav-btn" id="nav-docs" onclick="switchTab('docs')">
+      <svg viewBox="0 0 26 26" fill="none"><rect x="4" y="2" width="14" height="18" rx="3" stroke="#888" stroke-width="2"/><rect x="8" y="6" width="14" height="18" rx="3" stroke="#888" stroke-width="2" fill="none"/><path d="M8 10h6M8 13h4" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Документи</span>
+    </button>
+    <button class="nav-btn" id="nav-services" onclick="switchTab('services')">
+      <svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="3" stroke="#888" stroke-width="2"/><path d="M13 3v3M13 20v3M3 13h3M20 13h3M5.6 5.6l2.1 2.1M18.3 18.3l2.1 2.1M5.6 20.4l2.1-2.1M18.3 7.7l2.1-2.1" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Сервіси</span>
+    </button>
+    <button class="nav-btn" id="nav-menu" onclick="switchTab('menu')">
+      <svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="10" r="5" stroke="#888" stroke-width="2"/><path d="M3 23c0-5.5 4.5-9 10-9s10 3.5 10 9" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Меню</span>
+    </button>
+  </nav>
 </div>
 
-<nav class="tab-bar">
-    <a href="#" class="tab-item active"><div class="tab-icon"></div>Документи</a>
-    <a href="#" class="tab-item"><div class="tab-icon"></div>Сервіси</a>
-    <a href="#" class="tab-item"><div class="tab-icon"></div>Повідомлення</a>
-    <a href="#" class="tab-item"><div class="tab-icon"></div>Меню</a>
-</nav>
+<!-- MODALS -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-sheet" id="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <button class="modal-btn" onclick="closeModalDirect()">Зрозуміло</button>
+    <button class="modal-btn secondary" onclick="closeModalDirect()">Закрити</button>
+  </div>
+</div>
 
-<script src="code.js"></script>
-<script src="swipe.js"></script>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ===== ANIMATED GRADIENT BACKGROUND =====
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const blobs = [
+  { x:0.2,  y:0.15, r:0.55, color:[126,200,200], speed:0.0007, angle:0   },
+  { x:0.75, y:0.1,  r:0.45, color:[180,160,220], speed:0.0009, angle:1.2 },
+  { x:0.85, y:0.5,  r:0.4,  color:[220,160,190], speed:0.0008, angle:2.4 },
+  { x:0.1,  y:0.65, r:0.5,  color:[160,220,180], speed:0.0006, angle:3.6 },
+  { x:0.5,  y:0.85, r:0.45, color:[220,210,150], speed:0.001,  angle:4.8 },
+  { x:0.5,  y:0.4,  r:0.35, color:[200,230,255], speed:0.0005, angle:0.5 },
+];
+function drawBg() {
+  ctx.fillStyle = '#c8dfe8';
+  ctx.fillRect(0, 0, W, H);
+  blobs.forEach(b => {
+    b.angle += b.speed * 60;
+    const cx = (b.x + Math.sin(b.angle) * 0.18) * W;
+    const cy = (b.y + Math.cos(b.angle * 0.7) * 0.15) * H;
+    const r  = b.r * Math.max(W, H);
+    const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    const [rr,gg,bb] = b.color;
+    g.addColorStop(0, `rgba(${rr},${gg},${bb},0.72)`);
+    g.addColorStop(1, `rgba(${rr},${gg},${bb},0)`);
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fillStyle = g; ctx.fill();
+  });
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// ===== NAVIGATION =====
+function switchTab(tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + tab).classList.add('active');
+  document.getElementById('nav-' + tab).classList.add('active');
+}
+
+// ===== CARD CAROUSEL =====
+let currentCard = 0;
+const TOTAL = 5;
+const track = document.getElementById('cardsTrack');
+const dotsEl = document.getElementById('carouselDots');
+
+for (let i = 0; i < TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goToCard(i);
+  dotsEl.appendChild(d);
+}
+
+function goToCard(idx) {
+  const prev = currentCard;
+  currentCard = Math.max(0, Math.min(idx, TOTAL - 1));
+
+  // update active class for scale effect
+  document.querySelectorAll('.doc-card-wrap').forEach((c, i) => {
+    c.classList.toggle('is-active', i === currentCard);
+  });
+
+  const cardEl  = document.querySelector('.doc-card-wrap');
+  const cardW   = cardEl.offsetWidth;
+  const gap     = 12;
+  const offset  = currentCard * (cardW + gap);
+  track.style.transform = `translateX(${-offset}px)`;
+
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentCard));
+}
+
+// Touch/swipe
+let startX = 0, dragging = false;
+const vp = document.getElementById('cardsViewport');
+vp.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, {passive:true});
+vp.addEventListener('touchend',   e => {
+  if (!dragging) return;
+  const dx = e.changedTouches[0].clientX - startX;
+  if (Math.abs(dx) > 40) dx < 0 ? goToCard(currentCard+1) : goToCard(currentCard-1);
+  dragging = false;
+}, {passive:true});
+
+// ===== CARD FLIP =====
+function flipCard(idx) {
+  // only flip the active card
+  if (idx !== currentCard) { goToCard(idx); return; }
+  document.getElementById('card-' + idx).classList.toggle('flipped');
+}
+
+// ===== QR CODES =====
+const qrData = [
+  'https://diia.gov.ua/doc/edocument/3474211794',
+  'https://diia.gov.ua/doc/rnokpp/3474211794',
+  'https://diia.gov.ua/doc/driver-license/UA2018',
+  'https://diia.gov.ua/doc/student/UA-2018-4421',
+  'https://diia.gov.ua/doc/passport/UA2030',
+];
+function generateQR(id, data) {
+  try { new QRCode(document.getElementById(id), { text:data, width:260, height:260, colorDark:'#000', colorLight:'#fff', correctLevel:QRCode.CorrectLevel.M }); } catch(e){}
+}
+setTimeout(() => qrData.forEach((d,i) => generateQR('qr-'+i, d)), 500);
+
+// ===== COPY =====
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('Скопійовано: ' + text));
+}
+
+// ===== MODALS =====
+const MODALS = {
+  nezlamnist: { title:'🛡️ Незламність', body:'Тут ви знайдете найближчі укриття, Пункти незламності та відділення Power Banking. Також можете подати заяву про відсутній зв\'язок.' },
+  scanner:    { title:'📷 Дія Сканер',   body:'Скануйте QR-коди документів для швидкої перевірки. Функція доступна для верифікації особи, документів та послуг.' },
+  military:   { title:'🪖 Військові облігації', body:'Придбайте військові облігації та підтримайте ЗСУ. Мінімальна сума — 1000 грн. Дохідність — 9.5% річних.' },
+  signal:     { title:'📵 Відсутній зв\'язок', body:'Подайте заяву про відсутність зв\'язку у вашій місцевості. Заявку буде розглянуто оператором.' },
+  drones:     { title:'🚁 Лінія дронів', body:'Підтримайте програму "Лінія дронів". Задонатьте на придбання дронів для ЗСУ. Разом змінимо хід подій!' },
+  cashback:   { title:'💰 Кешбек Дія',   body:'За травень ви ще не накопичили кешбек. Здійснюйте оплати через Дія.Pay та отримуйте до 5% кешбеку від держави!' },
+  docMore:    { title:'⚙️ Дії з документом', body:'Поділитися документом, зберегти PDF, перевірити статус або поновити документ.' },
+  service:    { title:'⚡ Сервіс',        body:'Цей сервіс дозволяє отримати державну послугу онлайн без відвідування офісу. Оформлення — 5–10 хвилин.' },
+  profile:    { title:'👤 Профіль',       body:'Пособілов Богдан Романович\nДата народження: 13.02.1995\nРНОКПП: 3474211794\nEmail: bohdan@example.com' },
+  notify:     { title:'🔔 Сповіщення',   body:'Керуйте push-сповіщеннями від держави: оновлення документів, нові сервіси, важливі повідомлення.' },
+  security:   { title:'🔐 Безпека',       body:'Налаштування Face ID, PIN-коду та двофакторної аутентифікації для захисту вашого облікового запису.' },
+  lang:       { title:'🌐 Мова',          body:'Оберіть мову інтерфейсу:\n• Українська ✓\n• English\n• Deutsch' },
+  support:    { title:'💬 Підтримка',     body:'Якщо виникли питання:\n📞 0800 600 101 (безкоштовно)\n✉️ support@diia.gov.ua' },
+  about:      { title:'ℹ️ Про додаток',   body:'Дія — державний додаток України\nВерсія: 6.14.2\nРозробник: Мінцифри України' },
+  logout:     { title:'🚪 Вийти',         body:'Ви дійсно хочете вийти з облікового запису Дія?' },
+};
+function openModal(key) {
+  const c = MODALS[key] || { title:'Функція', body:'Ця функція в розробці.' };
+  document.getElementById('modal-title').textContent = c.title;
+  document.getElementById('modal-body').textContent  = c.body;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(e) { if (e.target.id === 'modal-overlay') closeModalDirect(); }
+function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ===== PWA =====
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
+</script>
 </body>
 </html>
