@@ -453,11 +453,11 @@ html, body {
   flex-direction: column;
 }
 .card-title {
-  font-size: 19px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 600; /* В оригинале он не слишком жирный */
   color: #000;
-  margin-bottom: 14px;
-  letter-spacing: -0.2px;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
 }
 .card-photo-row {
   display: flex;
@@ -481,20 +481,18 @@ html, body {
 .card-photo img { width: 100%; height: 100%; object-fit: cover; }
 .card-info { flex: 1; }
 .card-info-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
-  color: #444;
-  margin-bottom: 1px;
-  line-height: 1.35;
-  /* allows "Дата народження:" to wrap naturally to two lines */
-  white-space: normal;
+  color: #111; /* Цвет темнее, чем в твоем коде */
+  margin-bottom: 4px;
+  line-height: 1.2;
 }
 .card-info-value {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: #000;
-  margin-bottom: 14px;
-  line-height: 1.3;
+  margin-bottom: 16px; /* Чуть больше отступ между блоками */
+  line-height: 1.2;
 }
 
 /* Scrolling ticker on card */
@@ -513,8 +511,8 @@ html, body {
   animation: ticker-scroll 18s linear infinite;
 }
 .card-ticker span {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500; /* В оригинале она тоньше */
   color: #000;
   padding-right: 60px;
 }
@@ -533,9 +531,10 @@ html, body {
 }
 .card-name {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700; /* Делаем акцент на имени */
   color: #000;
-  line-height: 1.2;
+  line-height: 1.15; /* Имя в оригинале сбито чуть плотнее */
+  letter-spacing: -0.3px;
 }
 .card-number {
   font-size: 24px;
@@ -843,4 +842,15 @@ html, body {
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/*font*/
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Сначала пробуем оригинальный e-Ukraine (если он установлен), затем Onest */
+  --font: 'e-Ukraine', 'Onest', sans-serif;
+  --black: #000000;
+  --white: #ffffff;
+  /* ... остальные твои переменные ... */
 }
