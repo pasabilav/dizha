@@ -85,6 +85,16 @@ html, body {
   padding-right: env(safe-area-inset-right, 0px);
 }
 
+#nav::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 100px; /* Берем с запасом, чтобы перекрыть любую безопасную зону */
+  background: #000;
+}
+
 .nav-btn {
   flex: 1;
   display: flex;
