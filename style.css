@@ -59,6 +59,7 @@ html, body {
 }
 .page::-webkit-scrollbar { display: none; }
 .page.active { display: block; }
+#page-docs.active { display: flex; }
 
 /* ===== STATUS BAR SPACER ===== */
 .status-bar {
@@ -336,13 +337,19 @@ html, body {
 .flag-bar.yellow { background: #FFD700; height: 22px; }
 
 /* ===== ДОКУМЕНТИ ===== */
-#page-docs { padding-top: 0; }
-
-.docs-area {
-  padding-top: 20px;
+#page-docs {
+  padding-top: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100%;
+}
+
+.docs-area {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 /* ── Cards carousel ─────────────────────────── */
@@ -350,31 +357,31 @@ html, body {
   width: 100%;
   overflow: hidden;
   position: relative;
-  /* extra vertical room so scale(0.88) side cards aren't clipped */
-  padding: 20px 0 24px;
+  padding: 16px 0 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .cards-track {
   display: flex;
   gap: 12px;
-  /* left padding = enough to centre the first card */
-  padding: 0 calc((100vw - (100vw - 64px)) / 2);
+  padding: 0 32px;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
-  /* allow transforms outside overflow */
   transform-style: flat;
+  height: 100%;
+  align-items: stretch;
 }
 
 /* ── Card wrap (perspective container) ────── */
 .doc-card-wrap {
   flex-shrink: 0;
-  /* visible card takes most of the screen width */
-  width: calc(100vw - 64px);
+  width: calc(100vw - 80px);
   max-width: 340px;
-  aspect-ratio: 0.62;
+  height: 100%;
   perspective: 1000px;
   cursor: pointer;
-  /* side cards: smaller & blurred, no text readable */
   transform: scale(0.88);
   opacity: 0.55;
   filter: blur(1px);
@@ -382,7 +389,6 @@ html, body {
               opacity  0.4s ease,
               filter   0.4s ease;
 }
-/* active (centred) card */
 .doc-card-wrap.is-active {
   transform: scale(1);
   opacity: 1;
@@ -441,6 +447,7 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 .card-title {
   font-size: 19px;
