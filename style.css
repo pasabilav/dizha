@@ -26,7 +26,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: var(--font);
-  background: #000;
+  background: #123123;
 }
 
 /* ===== ANIMATED BACKGROUND ===== */
@@ -368,7 +368,7 @@ html, body {
   display: flex;
   gap: 12px;
   /* Важно: отступ должен быть ровно половиной от того, что мы вычитаем из ширины карточки (96 / 2 = 48) */
-  padding: 0 48px;
+  padding: 0 24px;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
   transform-style: flat;
@@ -377,10 +377,10 @@ html, body {
 /* ── Card wrap (perspective container) ────── */
 .doc-card-wrap {
   flex-shrink: 0;
-  /* Увеличили вычет до 96px, тем самым уменьшив саму карточку */
-  width: calc(100vw - 96px);
-  /* Уменьшили максимальный размер для больших экранов */
-  max-width: 300px;
+  /* Уменьшаем вычет до 48px, чтобы карточка стала значительно шире */
+  width: calc(100vw - 48px);
+  /* Увеличиваем максимальную ширину, чтобы она не сжималась на современных телефонах */
+  max-width: 360px;
   aspect-ratio: 0.62;
   perspective: 1000px;
   cursor: pointer;
