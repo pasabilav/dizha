@@ -23,7 +23,7 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   overflow: hidden;
   font-family: var(--font);
   background: #123123;
@@ -41,11 +41,8 @@ html, body {
 /* ===== APP SHELL ===== */
 #app {
   position: fixed;
-  /* cover entire screen including safe areas */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
+  height: 100dvh; /* Добавляем принудительную высоту */
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -368,7 +365,7 @@ html, body {
   display: flex;
   gap: 12px;
   /* Важно: отступ должен быть ровно половиной от того, что мы вычитаем из ширины карточки (96 / 2 = 48) */
-  padding: 0 24px;
+  padding: 0 16px;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
   transform-style: flat;
@@ -378,10 +375,10 @@ html, body {
 .doc-card-wrap {
   flex-shrink: 0;
   /* Уменьшаем вычет до 48px, чтобы карточка стала значительно шире */
-  width: calc(100vw - 48px);
+  width: calc(100vw - 32px);
   /* Увеличиваем максимальную ширину, чтобы она не сжималась на современных телефонах */
-  max-width: 360px;
-  aspect-ratio: 0.62;
+  max-width: 400px;
+  aspect-ratio: 0.64;
   perspective: 1000px;
   cursor: pointer;
   transform: scale(0.88);
@@ -524,7 +521,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.15);
 }
 .card-name {
   font-size: 22px;
@@ -581,7 +578,7 @@ html, body {
   cursor: pointer;
 }
 .dot.active {
-  background: rgba(0,0,0,0.8);
+  background: rgba(255, 255, 255, 1);
   transform: scale(1.3);
 }
 
@@ -845,9 +842,14 @@ html, body {
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Сначала пробуем оригинальный e-Ukraine (если он установлен), затем Onest */
-  --font: 'e-Ukraine', 'Onest', sans-serif;
+  --font: 'Nunito', sans-serif;
   --black: #000000;
   --white: #ffffff;
-  /* ... остальные твои переменные ... */
+  /* Уменьшаем плотность белого (с 0.68 до 0.35) */
+  --card-bg: rgba(255, 255, 255, 0.35);
+  /* Можно немного усилить размытие */
+  --card-blur: blur(30px);
+  --radius: 24px;
+  --nav-h: 80px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
