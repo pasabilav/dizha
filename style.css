@@ -368,30 +368,27 @@ html, body {
 .cards-track {
   display: flex;
   gap: 12px;
-  /* left padding = enough to centre the first card */
-  padding: 0 calc((100vw - (100vw - 64px)) / 2);
+  /* Важно: отступ должен быть ровно половиной от того, что мы вычитаем из ширины карточки (96 / 2 = 48) */
+  padding: 0 48px;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
-  /* allow transforms outside overflow */
   transform-style: flat;
 }
 
 /* ── Card wrap (perspective container) ────── */
 .doc-card-wrap {
   flex-shrink: 0;
-  /* visible card takes most of the screen width */
-  width: calc(100vw - 64px);
-  max-width: 340px;
+  /* Увеличили вычет до 96px, тем самым уменьшив саму карточку */
+  width: calc(100vw - 96px);
+  /* Уменьшили максимальный размер для больших экранов */
+  max-width: 300px;
   aspect-ratio: 0.62;
   perspective: 1000px;
   cursor: pointer;
-  /* side cards: smaller & blurred, no text readable */
   transform: scale(0.88);
   opacity: 0.55;
   filter: blur(1px);
-  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),
-  opacity  0.4s ease,
-  filter   0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s ease, filter 0.4s ease;
 }
 /* active (centred) card */
 .doc-card-wrap.is-active {
