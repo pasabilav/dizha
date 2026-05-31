@@ -347,13 +347,19 @@ html, body {
 .flag-bar.yellow { background: #FFD700; height: 22px; }
 
 /* ===== ДОКУМЕНТИ ===== */
-#page-docs { padding-top: 0; }
+#page-docs { padding-top: 0; flex-direction: column;}
+#page-docs.active {
+  display: flex;
+}
 
 .docs-area {
-  padding-top: 20px;
+  flex: 1; /* Заставляет блок растянуться на всю доступную высоту */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Центрируем карточку строго по вертикали */
+  padding-top: 0;
+  padding-bottom: 2vh; /* Небольшая компенсация для визуального баланса */
 }
 
 /* ── Cards carousel ─────────────────────────── */
