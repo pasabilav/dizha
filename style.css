@@ -54,7 +54,7 @@ html, body {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  /* no padding-bottom — nav is in flex flow, not fixed */
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   min-height: 0;
@@ -71,14 +71,15 @@ html, body {
 
 /* ===== NAVIGATION ===== */
 #nav {
-  /* in flex flow — NOT fixed, so it always sits at the physical bottom */
-  flex-shrink: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   background: #000;
   display: flex;
   align-items: flex-start;
   padding-top: 12px;
-  /* This covers the home indicator / Dynamic Island safe area */
   padding-bottom: env(safe-area-inset-bottom, 8px);
   min-height: calc(60px + env(safe-area-inset-bottom, 0px));
   z-index: 100;
@@ -337,19 +338,19 @@ html, body {
 .flag-bar.yellow { background: #FFD700; height: 22px; }
 
 /* ===== ДОКУМЕНТИ ===== */
-#page-docs { padding-top: 0; flex-direction: column;}
+#page-docs { padding-top: 0; flex-direction: column; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px)); }
 #page-docs.active {
   display: flex;
 }
 
 .docs-area {
-  flex: 1; /* Заставляет блок растянуться на всю доступную высоту */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Центрируем карточку строго по вертикали */
+  justify-content: center;
   padding-top: 0;
-  padding-bottom: 2vh; /* Небольшая компенсация для визуального баланса */
+  padding-bottom: 0;
 }
 
 /* ── Cards carousel ─────────────────────────── */
